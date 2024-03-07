@@ -1,0 +1,59 @@
+.homePage {
+    margin-top: 178px;
+
+    &__container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        max-width: 420px;
+        width: 100%;
+    }
+
+    &__greetings {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__title {
+        font-weight: 900;
+        line-height: 53px;
+        text-align: center;
+    }
+
+    &__subtitle {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 30px;
+        letter-spacing: 0px;
+        text-align: center;
+
+    }
+
+
+    &__img {
+        width: 420px;
+        height: 446px;
+
+    }
+
+    &__logOut {
+        display: block;
+        padding: 13px;
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        text-align: center;
+        color: rgb(41, 41, 41);
+        border: none;
+        background: #fff;
+    }
+}

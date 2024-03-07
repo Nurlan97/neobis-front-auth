@@ -1,0 +1,89 @@
+.createAccount {
+    max-width: 343px;
+    width: 100%;
+    margin-top: 60px;
+
+    &__title {
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 48px;
+        text-align: center;
+    }
+
+    &__form {
+        margin-top: 48px;
+        display: flex;
+        flex-direction: column;
+
+
+        &_input_container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            position: relative;
+        }
+
+
+        &_login_input,
+        &_email_input,
+        &_password_input,
+        &_password_input_confirm {
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: rgb(248, 248, 248);
+            border: none;
+            outline: none;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 24px;
+            text-align: left;
+
+            &::placeholder {
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 24px;
+                text-align: left;
+
+            }
+
+        }
+
+
+        &_password_input {
+
+            &_eyeToggle {
+                position: absolute;
+                right: 13px;
+                top: 146px;
+                cursor: pointer;
+            }
+        }
+
+        &_passwordConfirm_input {
+
+            &_eyeToggle {
+                position: absolute;
+                right: 13px;
+                top: 212px;
+                cursor: pointer;
+            }
+        }
+
+        &_btn {
+            margin-top: 48px;
+            border: none;
+            padding: 13px;
+            width: 100%;
+            border-radius: 12px;
+            background: rgb(41, 41, 41);
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 24px;
+            letter-spacing: 0%;
+            text-align: center;
+            color: rgb(248, 248, 248);
+            cursor: pointer;
+        }
+    }
+}
+

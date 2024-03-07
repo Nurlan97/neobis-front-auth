@@ -1,0 +1,80 @@
+.logoutConfirmation {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+
+    &__wrapper {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+    }
+
+    &__modal {
+        width: 375px;
+        height: 274px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 32px;
+        border-radius: 32px;
+        background: rgb(255, 255, 255);
+        gap: 8px;
+
+
+        &_title {
+            font-size: 20px;
+            font-weight: 900;
+            line-height: 30px;
+            text-align: center;
+            color: rgb(33, 33, 33);
+            padding: 13px;
+        }
+
+        &_subtitle {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+            letter-spacing: 0px;
+            text-align: center;
+            color: rgb(118, 118, 118);
+            padding: 13px;
+        }
+
+        &_logout-confirm-button,
+        &_logout-cancel-button {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 24px;
+            text-align: center;
+            color: rgb(41, 41, 41);
+            cursor: pointer;
+            padding: 13px;
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            background: #ffffff;
+            transition: all 0.5s;
+        }
+    }
+}
+
+.activeBtn {
+    background: rgb(41, 41, 41);
+    color: rgb(248, 248, 248);
+}
+
+.active {
+    display: block;
+}
+
+.disabled {
+    display: none;
+}
