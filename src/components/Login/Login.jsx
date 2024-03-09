@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import './Login.scss';
 import eyeOn from '../../../public/assets/images/loginPage/eyeOn.png'
 import eyeOff from '../../../public/assets/images/loginPage/eyeOff.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [userLoginInput, setUserLoginInput] = useState('')
     const [userPasswordInput, setUserPasswordInput] = useState('')
     const [active, setActive] = useState(true)
 
+    const navigate = useNavigate()
 
     const handleUserLoginInput = (e) => {
         setUserLoginInput(e.target.value)
@@ -20,7 +21,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        <Link to='/homePage'/>
+        navigate('/homePage')
     }
 
     const handleEyeToggle = () => {
@@ -54,16 +55,12 @@ const Login = () => {
                     {active ? <img src={eyeOn} alt="eyeOn" /> : <img src={eyeOff} />}
                    
                 </span>
-                {/* <button
+                <button
                     type='submit'
                     className="login__form_btn">
                     Войти
-                </button> */}
-                <Link
-                    to='/homePage'
-                    className="login__form_btn">
-                    Войти
-                </Link>
+                </button>
+                
 
 
             </form>

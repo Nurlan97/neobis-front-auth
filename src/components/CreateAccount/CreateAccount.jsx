@@ -6,35 +6,28 @@ import passwordConfirmEyeOff from '../../../public/assets/images/loginPage/eyeOf
 import backHomeIcon from '../../../public/assets/images/registration/goBack_img.png'
 
 import './CreateAccount.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import GoBack from '../GoBack/GoBack';
 import { useFormik } from 'formik';
+import { initialValues, validate } from './helpers.js'
+import ErrorsPassword from './ErrorsPassword.jsx';
 
 
 const CreateAccount = () => {
 
-    // const [userEmailInput, setUserEmailInput] = useState('')
-    // const [userCreateLoginInput, setUserCreateLoginInput] = useState('')
-    // const [userCreatePasswordInput, setUserCreatePasswordInput] = useState('')
+    const navigate = useNavigate();
+
+    const onSubmit = values => {
+        // console.log('Form data', values)
+        navigate('/emailVerification')
+        console.log(1)
+
+    }
+
     const [passwordActive, setPasswordActive] = useState(true)
     const [passwordConfirmActive, setPasswordConfirmActive] = useState(true)
 
-    // const handleUserEmailInput = (e) => {
-    //     setUserEmailInput(e.target.value)
-    // }
 
-    // const handleUserCreateLoginInput = (e) => {
-    //     setUserCreateLoginInput(e.target.value)
-    // }
-
-    // const handleUserCreatePasswordInput = (e) => {
-    //     setUserCreatePasswordInput(e.target.value)
-    // }
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     // {<Link to="/emailVerification"/>}
-    // }
 
     const handlePasswordEyeToggle = () => {
         setPasswordActive(!passwordActive)
@@ -46,21 +39,12 @@ const CreateAccount = () => {
 
 
     const formik = useFormik({
-        initialValues: {
-            email__input: '',
-            login__input: '',
-            password__input: '',
-            passwordConfirm__input: '',
-
-        },
-
-        onSubmit: values => {
-            console.log('Submit Values', values)
-        }
-
-
+        initialValues,
+        onSubmit,
+        validate
     })
 
+    // console.log(formik.values.password__input)
     return (
         <>
             <GoBack />
@@ -72,64 +56,108 @@ const CreateAccount = () => {
                 </h2>
                 <form
                     className='createAccount__form'
-                    // onSubmit={handleSubmit}
+
                     onSubmit={formik.handleSubmit}
 
                 >
                     <div className='createAccount__form_input_container'>
-                        <input
-                            type="email"
-                            className="createAccount__form_email_input"
-                            placeholder='Введи адрес почты'
-                            name="email__input"
-                            // value={userEmailInput}
-                            // onChange={handleUserEmailInput}
-                            value={formik.values.email__input}
-                            onChange={formik.handleChange}
-                        />
-                        <input
-                            type="text"
-                            className="createAccount__form_login_input"
-                            placeholder='Придумай логин'
-                            name="login__input"
-                            // value={userCreateLoginInput}
-                            // onChange={handleUserCreateLoginInput}
-                            value={formik.values.login__input}
-                            onChange={formik.handleChange}
-                        />
-                        <input
-                            type={passwordActive ? 'text' : 'password'}
-                            className="createAccount__form_password_input"
-                            placeholder='Создай пароль'
-                            name='password__input'
-                            // value={userCreatePasswordInput}
-                            // onChange={handleUserCreatePasswordInput}
-                            value={formik.values.password__input}
-                            onChange={formik.handleChange}
-                        />
+                        <div>
 
-                        <span
-                            className='createAccount__form_password_input_eyeToggle'
-                            onClick={handlePasswordEyeToggle}
-                        >
-                            {passwordActive ? <img src={passwordEyeOn} alt="eyeOn" /> : <img src={passwordEyeOff} />}
-                        </span>
-                        <input
-                            type={passwordConfirmActive ? 'text' : 'password'}
-                            className="createAccount__form_password_input_confirm"
-                            placeholder='Повтори пароль'
-                            name='passwordConfirm__input'
-                            value={formik.values.passwordConfirm__input}
-                            onChange={formik.handleChange}
-                        />
+                            <input
+                                type="email"
+                                className="createAccount__form_email_input"
+                                placeholder='Введи адрес почты'
+                                name="email__input"
+                                value={formik.values.email__input}
+                                onChange={formik.handleChange}
+                            />
+                            {formik.errors.email__input ? <div className='createAccount__form_error_message'>{formik.errors.email__input}</div> : null}
 
-                        <span
-                            className='createAccount__form_passwordConfirm_input_eyeToggle'
-                            onClick={handlePasswordConfirmEyeToggle}
-                        >
-                            {passwordConfirmActive ? <img src={passwordConfirmEyeOn} alt="eyeOn" /> : <img src={passwordConfirmEyeOff} />}
+                        </div>
 
-                        </span>
+                        <div>
+                            <input
+                                type="text"
+                                className="createAccount__form_login_input"
+                                placeholder='Придумай логин'
+                                name="login__input"
+                                value={formik.values.login__input}
+                                onChange={formik.handleChange}
+                            />
+                            {formik.errors.login__input ? <div className='createAccount__form_error_message'>{formik.errors.login__input}</div> : null}
+                        </div>
+
+                        {/* PASSWORD */}
+
+                        <div className="createAccount__form_password_input-wrapper">
+                            <input
+                                type={passwordActive ? 'text' : 'password'}
+                                className="createAccount__form_password_input"
+                                placeholder='Создай пароль'
+                                name='password__input'
+                                value={formik.values.password__input}
+                                onChange={formik.handleChange}
+                            />
+                            <ErrorsPassword
+                                formik={formik}
+                            />
+    
+                            {/* {formik.errors.password__input_length ? <div className='createAccount__form_error_message'>
+                                {formik.errors.password__input_length}
+                            </div> : null}
+                            {formik.errors.password__input_length_isValid ? <div className='createAccount__form_isValid_message'>
+                                {formik.errors.password__input_length_isValid}
+                            </div> : null}
+
+                            {formik.errors.password__input_hasLowerCaseAndUpperCase ? <div className='createAccount__form_error_message'>
+                                {formik.errors.password__input_hasLowerCaseAndUpperCase}
+                            </div> : null}
+                            {formik.errors.password__input_hasLowerCaseAndUpperCase_isValid ? <div className='createAccount__form_isValid_message'>
+                                {formik.errors.password__input_hasLowerCaseAndUpperCase_isValid}
+                            </div> : null}
+
+                            {formik.errors.password__input_missingNumber ? <div className='createAccount__form_error_message'>
+                                {formik.errors.password__input_missingNumber}
+                            </div> : null}
+                            {formik.errors.password__input_missingNumber_isValid ? <div className='createAccount__form_isValid_message'>
+                                {formik.errors.password__input_missingNumber_isValid}
+                            </div> : null}
+
+                            {formik.errors.password__input_missingChar ? <div className='createAccount__form_error_message'>
+                                {formik.errors.password__input_missingChar}
+                            </div> : null}
+                            {formik.errors.password__input_missingChar_isValid ? <div className='createAccount__form_isValid_message'>
+                                {formik.errors.password__input_missingChar_isValid}
+                            </div> : null} */}
+
+                            <span
+                                className='createAccount__form_password_input_eyeToggle'
+                                onClick={handlePasswordEyeToggle}
+                            >
+                                {passwordActive ? <img src={passwordEyeOn} alt="eyeOn" /> : <img src={passwordEyeOff} />}
+                            </span>
+                        </div>
+                        <div className="createAccount__form_password_input_confirm-wrapper">
+                            <input
+                                type={passwordConfirmActive ? 'text' : 'password'}
+                                className="createAccount__form_password_input_confirm"
+                                placeholder='Повтори пароль'
+                                name='passwordConfirm__input'
+                                value={formik.values.passwordConfirm__input}
+                                onChange={formik.handleChange}
+                            />
+                            {formik.errors.passwordConfirm__input ? <div className='createAccount__form_error_message'>
+                                {formik.errors.passwordConfirm__input}
+                            </div> : null}
+
+                            <span
+                                className='createAccount__form_passwordConfirm_input_eyeToggle'
+                                onClick={handlePasswordConfirmEyeToggle}
+                            >
+                                {passwordConfirmActive ? <img src={passwordConfirmEyeOn} alt="eyeOn" /> : <img src={passwordConfirmEyeOff} />}
+
+                            </span>
+                        </div>
                     </div>
                     <button
                         type='submit'

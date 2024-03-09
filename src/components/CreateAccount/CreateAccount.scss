@@ -20,7 +20,7 @@
             display: flex;
             flex-direction: column;
             gap: 14px;
-            position: relative;
+            // position: relative;
         }
 
 
@@ -37,6 +37,7 @@
             font-weight: 700;
             line-height: 24px;
             text-align: left;
+            width: 100%;
 
             &::placeholder {
                 font-size: 16px;
@@ -48,15 +49,23 @@
 
         }
 
+        &_password_input-wrapper,
+        &_password_input_confirm-wrapper {
+            position: relative;
+        }
+
+
 
         &_password_input {
 
             &_eyeToggle {
                 position: absolute;
                 right: 13px;
-                top: 146px;
+                top: 17px;
                 cursor: pointer;
             }
+
+
         }
 
         &_passwordConfirm_input {
@@ -64,9 +73,26 @@
             &_eyeToggle {
                 position: absolute;
                 right: 13px;
-                top: 212px;
+                top: 17px;
                 cursor: pointer;
+
             }
+        }
+
+        &_error_message {
+            color: rgb(236, 0, 0);
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 20px;
+            text-align: left;
+        }
+
+        &_isValid_message {
+            color: rgb(27, 162, 40);
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 20px;
+            text-align: left;
         }
 
         &_btn {
@@ -86,4 +112,3 @@
         }
     }
 }
-
