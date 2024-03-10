@@ -6,7 +6,7 @@ import passwordConfirmEyeOff from '../../../public/assets/images/loginPage/eyeOf
 import backHomeIcon from '../../../public/assets/images/registration/goBack_img.png'
 
 import './CreateAccount.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import GoBack from '../GoBack/GoBack';
 import { useFormik } from 'formik';
 import { initialValues, validate } from './helpers.js'
@@ -58,7 +58,6 @@ const CreateAccount = () => {
                     className='createAccount__form'
 
                     onSubmit={formik.handleSubmit}
-
                 >
                     <div className='createAccount__form_input_container'>
                         <div>
@@ -90,18 +89,27 @@ const CreateAccount = () => {
                         {/* PASSWORD */}
 
                         <div className="createAccount__form_password_input-wrapper">
-                            <input
-                                type={passwordActive ? 'text' : 'password'}
-                                className="createAccount__form_password_input"
-                                placeholder='Создай пароль'
-                                name='password__input'
-                                value={formik.values.password__input}
-                                onChange={formik.handleChange}
-                            />
+                            <div className="createAccount__form_password_input-container">
+                                <input
+                                    type={passwordActive ? 'text' : 'password'}
+                                    className="createAccount__form_password_input"
+                                    placeholder='Создай пароль'
+                                    name='password__input'
+                                    value={formik.values.password__input}
+                                    onChange={formik.handleChange}
+                                />
+
+                                <span
+                                    className='createAccount__form_password_input_eyeToggle'
+                                    onClick={handlePasswordEyeToggle}
+                                >
+                                    {passwordActive ? <img src={passwordEyeOn} alt="eyeOn" /> : <img src={passwordEyeOff} />}
+                                </span>
+                            </div>
                             <ErrorsPassword
                                 formik={formik}
                             />
-    
+
                             {/* {formik.errors.password__input_length ? <div className='createAccount__form_error_message'>
                                 {formik.errors.password__input_length}
                             </div> : null}
@@ -130,33 +138,37 @@ const CreateAccount = () => {
                                 {formik.errors.password__input_missingChar_isValid}
                             </div> : null} */}
 
-                            <span
+                            {/* <span
                                 className='createAccount__form_password_input_eyeToggle'
                                 onClick={handlePasswordEyeToggle}
                             >
                                 {passwordActive ? <img src={passwordEyeOn} alt="eyeOn" /> : <img src={passwordEyeOff} />}
-                            </span>
+                            </span> */}
                         </div>
                         <div className="createAccount__form_password_input_confirm-wrapper">
-                            <input
-                                type={passwordConfirmActive ? 'text' : 'password'}
-                                className="createAccount__form_password_input_confirm"
-                                placeholder='Повтори пароль'
-                                name='passwordConfirm__input'
-                                value={formik.values.passwordConfirm__input}
-                                onChange={formik.handleChange}
-                            />
+                            <div className="createAccount__form_password_input_confirm-container">
+                                <input
+                                    type={passwordConfirmActive ? 'text' : 'password'}
+                                    className="createAccount__form_password_input_confirm"
+                                    placeholder='Повтори пароль'
+                                    name='passwordConfirm__input'
+                                    value={formik.values.passwordConfirm__input}
+                                    onChange={formik.handleChange}
+                                />
+
+                                <span
+                                    className='createAccount__form_passwordConfirm_input_eyeToggle'
+                                    onClick={handlePasswordConfirmEyeToggle}
+                                >
+                                    {passwordConfirmActive ? <img src={passwordConfirmEyeOn} alt="eyeOn" /> : <img src={passwordConfirmEyeOff} />}
+
+                                </span>
+                            </div>
                             {formik.errors.passwordConfirm__input ? <div className='createAccount__form_error_message'>
                                 {formik.errors.passwordConfirm__input}
                             </div> : null}
 
-                            <span
-                                className='createAccount__form_passwordConfirm_input_eyeToggle'
-                                onClick={handlePasswordConfirmEyeToggle}
-                            >
-                                {passwordConfirmActive ? <img src={passwordConfirmEyeOn} alt="eyeOn" /> : <img src={passwordConfirmEyeOff} />}
 
-                            </span>
                         </div>
                     </div>
                     <button
@@ -164,11 +176,7 @@ const CreateAccount = () => {
                         className="login__form_btn">
                         Далее
                     </button>
-                    {/* <Link
-                        to="/emailVerification"
-                        className="login__form_btn">
-                        Далее
-                    </Link> */}
+
 
 
                 </form>
