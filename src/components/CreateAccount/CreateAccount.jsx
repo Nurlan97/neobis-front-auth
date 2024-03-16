@@ -11,16 +11,23 @@ import GoBack from '../GoBack/GoBack';
 import { useFormik } from 'formik';
 import { initialValues, validate } from './helpers.js'
 import ErrorsPassword from './ErrorsPassword.jsx';
-
+import { useSelector, useDispatch } from 'react-redux'
+import { userRegister } from '../../api/userAPI.js'
 
 const CreateAccount = () => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const onSubmit = values => {
         // console.log('Form data', values)
-        navigate('/emailVerification')
-        console.log(1)
+        // navigate('/emailVerification')
+        try {
+            const response = dispatch(userRegister(values))
+            console.log(response)
+        } catch(error) {
+            console.log(error)
+        }
 
     }
 
