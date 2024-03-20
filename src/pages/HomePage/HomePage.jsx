@@ -3,12 +3,18 @@ import './HomePage.scss';
 import TutorImage from '../../../public/assets/images/main_img.png'
 import { Link, useSearchParams } from 'react-router-dom';
 import LogoutConfirmation from '../../components/LogoutConfirmation/LogoutConfirmation';
+import { useDispatch } from 'react-redux';
+import { isAuthUser } from '../../api/userAPI';
+
 
 const HomePage = () => {
     const [modalPopup, setModalPopup] = useState(false)
+    const dispatch = useDispatch()
 
     const handleModaPopup = () => {
+        dispatch(isAuthUser(false));
         setModalPopup(true)
+
     }
 
     const handleModalPopout = () => {

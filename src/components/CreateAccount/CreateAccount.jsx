@@ -12,20 +12,22 @@ import { useFormik } from 'formik';
 import { initialValues, validate } from './helpers.js'
 import ErrorsPassword from './ErrorsPassword.jsx';
 import { useSelector, useDispatch } from 'react-redux'
-import { userRegister } from '../../api/userAPI.js'
+import { userRegister, Login } from '../../api/userAPI.js'
+
 
 const CreateAccount = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
-    const onSubmit = values => {
+    const onSubmit = async (values) => {
         // console.log('Form data', values)
-        // navigate('/emailVerification')
         try {
-            const response = dispatch(userRegister(values))
+            const response = await dispatch(userRegister(values))
+            dispatch(Login(values.email))
             console.log(response)
-        } catch(error) {
+            navigate('/confirmation')
+        } catch (error) {
             console.log(error)
         }
 
@@ -51,7 +53,7 @@ const CreateAccount = () => {
         validate
     })
 
-    // console.log(formik.values.password__input)
+    // console.log(formik.values.password)
     return (
         <>
             <GoBack />
@@ -73,11 +75,11 @@ const CreateAccount = () => {
                                 type="email"
                                 className="createAccount__form_email_input"
                                 placeholder='Введи адрес почты'
-                                name="email__input"
-                                value={formik.values.email__input}
+                                name="email"
+                                value={formik.values.email}
                                 onChange={formik.handleChange}
                             />
-                            {formik.errors.email__input ? <div className='createAccount__form_error_message'>{formik.errors.email__input}</div> : null}
+                            {formik.errors.email ? <div className='createAccount__form_error_message'>{formik.errors.email}</div> : null}
 
                         </div>
 
@@ -86,11 +88,11 @@ const CreateAccount = () => {
                                 type="text"
                                 className="createAccount__form_login_input"
                                 placeholder='Придумай логин'
-                                name="login__input"
-                                value={formik.values.login__input}
+                                name="username"
+                                value={formik.values.username}
                                 onChange={formik.handleChange}
                             />
-                            {formik.errors.login__input ? <div className='createAccount__form_error_message'>{formik.errors.login__input}</div> : null}
+                            {formik.errors.username ? <div className='createAccount__form_error_message'>{formik.errors.username}</div> : null}
                         </div>
 
                         {/* PASSWORD */}
@@ -101,8 +103,8 @@ const CreateAccount = () => {
                                     type={passwordActive ? 'text' : 'password'}
                                     className="createAccount__form_password_input"
                                     placeholder='Создай пароль'
-                                    name='password__input'
-                                    value={formik.values.password__input}
+                                    name='password'
+                                    value={formik.values.password}
                                     onChange={formik.handleChange}
                                 />
 
@@ -158,8 +160,8 @@ const CreateAccount = () => {
                                     type={passwordConfirmActive ? 'text' : 'password'}
                                     className="createAccount__form_password_input_confirm"
                                     placeholder='Повтори пароль'
-                                    name='passwordConfirm__input'
-                                    value={formik.values.passwordConfirm__input}
+                                    name='password_confirm'
+                                    value={formik.values.password_confirm}
                                     onChange={formik.handleChange}
                                 />
 
@@ -171,8 +173,8 @@ const CreateAccount = () => {
 
                                 </span>
                             </div>
-                            {formik.errors.passwordConfirm__input ? <div className='createAccount__form_error_message'>
-                                {formik.errors.passwordConfirm__input}
+                            {formik.errors.password_confirm ? <div className='createAccount__form_error_message'>
+                                {formik.errors.password_confirm}
                             </div> : null}
 
 

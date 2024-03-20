@@ -14,7 +14,7 @@ const ErrorsPassword = ({ formik }) => {
 
     }
 
-    const passwordValidation = validatePassword(formik.values.password__input);
+    const passwordValidation = validatePassword(formik.values.password);
 
     return (
         <div>

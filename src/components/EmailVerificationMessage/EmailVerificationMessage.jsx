@@ -3,14 +3,18 @@ import './EmailVerificationMessage.scss';
 import GoBack from '../GoBack/GoBack';
 import ResentEmailNotification from '../ResentEmailNotification/ResentEmailNotification';
 
+
+
 const EmailVerificationMessage = () => {
 
     const [showResentEmailModal, setShowResentEmailModal] = useState(false);
-    
+
+
+
 
     const handleResentEmailNotification = () => {
         setShowResentEmailModal(true)
-    
+
 
     }
 
@@ -40,17 +44,21 @@ const EmailVerificationMessage = () => {
 
 
                 <button
-                    className='emailVerificationMessage__btn' 
+                    className='emailVerificationMessage__btn'
                     onClick={handleResentEmailNotification}
+
                 >
                     Письмо не пришло
                 </button>
-                
-                <ResentEmailNotification
-                    modalPopUp={showResentEmailModal}
-                    onClose={handleCLoseResentEmailModal}
+                {showResentEmailModal &&
+                    <ResentEmailNotification
+                        modalPopUp={showResentEmailModal}
+                        onClose={handleCLoseResentEmailModal}
 
-                />
+                    />
+                }
+
+
             </div>
 
         </>
